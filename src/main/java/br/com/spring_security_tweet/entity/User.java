@@ -5,23 +5,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
-@Table(name = "tu_users")
+@Table(name = "to_users",
+        uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private UUID userId;
+    private Long userId;
     @Column(unique = true)
     private String username;
     private String password;
-    @Enumerated(EnumType.STRING)
-    private Set<String> roles;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roleEnums = new HashSet<>();
 }

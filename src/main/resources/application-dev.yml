@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:devdb # Banco de dados na mem?ria
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true # Habilita o console do H2
+      path: /h2-console # URL para acessar o console
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create # Controla o esquema do banco de dados
+    show-sql: true # Exibe as consultas SQL no console
+
