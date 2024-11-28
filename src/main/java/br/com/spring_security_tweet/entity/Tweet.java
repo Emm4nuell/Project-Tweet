@@ -6,7 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.Instant;
 
 @Entity
-@Table(name = "to_tweets")
+@Table(name = "tweets")
 public class Tweet {
 
     @Id
